@@ -3,7 +3,16 @@ uuid = "feb8cbbd-68b1-404a-b05d-bee13506913e"
 authors = ["Barbara Gąsiewska"]
 version = "1.0.0-DEV"
 
+[deps]
+AutoDiffLib = "9ebcfdad-f2d7-43e1-8332-a3d752c9a45c"
+JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+
 [compat]
+JLD2 = "0.5.13"
+Random = "1.11.0"
+Revise = "3.7.6"
 julia = "1.6.7"
 
 [extras]
