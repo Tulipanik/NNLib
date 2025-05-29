@@ -43,7 +43,7 @@ numobs(x::AbstractArray) = size(x, ndims(x))
 numobs(x::Tuple) = numobs(x[1])
 numobs(x::NamedTuple) = numobs(values(x)[1])
 
-getbatch(x::AbstractArray, idxs) = selectdim(x, ndims(x), idxs)
+getbatch(x::AbstractArray, idxs) = Array(selectdim(x, ndims(x), idxs))
 getbatch(x::Tuple, idxs) = map(d -> getbatch(d, idxs), x)
 getbatch(x::NamedTuple, idxs) = NamedTuple{keys(x)}(getbatch.(values(x), Ref(idxs)))
 

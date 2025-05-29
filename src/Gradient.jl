@@ -6,15 +6,14 @@ export gradient
 
 function gradient(f, model)
     loss = f(model)
-    print(typeof(loss))
+    # print(typeof(loss))
+    # @show size(loss.value)
 
     z = topological_sort(loss)
 
-    println(typeof(z))
-
     backward!(z)
 
-    grads = [layer.grads for layer in model.layers]
+    grads = [(layer.W.grad, layer.b.grad) for layer in model.layers]
 
     return grads
 end
