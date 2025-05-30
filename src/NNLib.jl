@@ -4,10 +4,10 @@ include("Layers/Dense.jl")
 include("Losses.jl")
 include("Model.jl")
 include("Optimizers.jl")
-include("Training.jl")
+include("Gradient.jl")
 include("DataLoader.jl")
 include("Utils.jl")
-include("Gradient.jl")
+include("Training.jl")
 
 using .DenseLayer: Dense
 export Dense
