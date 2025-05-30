@@ -12,7 +12,7 @@ y_test = load("data/imdb_dataset_prepared.jld2", "y_test")
 using NNLib, Printf, Statistics, Debugger
 
 dataset = DataLoader((X_train, y_train), batchsize=64, shuffle=true)
-model = Chain([Dense(size(X_train, 1), 32), Dense(32, 1)])
+model = Chain([Dense(size(X_train, 1), 32, σ=ReLU), Dense(32, 1, σ=Sigmoid)])
 
 function loss(m, x, y)
     mse_loss(m(x), y)
