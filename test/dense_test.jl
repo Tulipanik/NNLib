@@ -7,9 +7,6 @@ using Test
     dense = Dense(2, 3, σ=ReLU)
 
     y=@toposort dense(x)
-    # println(y)
-    # println(y)
 
     backward!(y)
-    print(x.grad)
 end

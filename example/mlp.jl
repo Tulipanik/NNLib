@@ -29,18 +29,13 @@ for epoch in 1:epochs
 
     t = @elapsed begin
         for (x, y) in dataset
-            # @show x
             grads = gradient(model) do m
                 ŷ = Variable(x, "x")
                 l = loss(m, ŷ, y)
-                # @show ŷ.grad
-                # @show ŷ.value
-                # @show l.value
                 total_loss += l.value
                 total_acc += accuracy(m, x, y)
                 return l
             end
-            # grads - gradienty W i b w warstwach
             for (layer, grad) in zip(model.layers, grads)
                 update!(opt, layer.W.value, grad[1], copy(layer.W.value))
             end

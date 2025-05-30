@@ -1,8 +1,6 @@
 module NNLib
 
-# Write your package code here.
 include("Layers/Dense.jl")
-# include("Layers/Activation.jl")
 include("Losses.jl")
 include("Model.jl")
 include("Optimizers.jl")
@@ -17,7 +15,6 @@ export Dense
 using .Model: Chain
 export Chain
 
-# export mse_loss
 using .Losses: binarycrossentropy, mse_loss
 export binarycrossentropy, mse_loss
 

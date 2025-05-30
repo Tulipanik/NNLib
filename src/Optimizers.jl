@@ -27,22 +27,14 @@ function apply!(o::Adam, x, Δ)
   @. vt = β[2] * vt + (1 - β[2]) * Δ * conj(Δ)
   @. Δ =  mt / (1 - βp[1]) / (√(vt / (1 - βp[2])) + o.epsilon) * η
 
-#   @show Statistics.mean(Δ)
   βp .= βp .* β
-
-
 
   return Δ
 end
 
 function update!(opt::AbstractOptimizer, x::AbstractArray, x̄, x2)\
-    # @show Statistics.mean(x̄)
   x̄r = copyto!(similar(x̄), x̄)
   x .-= apply!(opt, x, x̄r)
-
-#   @show Statistics.mean(x2 .- x)
-
-
 end
 
 end

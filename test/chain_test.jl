@@ -4,7 +4,7 @@ using AutoDiffLib
 
 @testset "Chain forward pass" begin
     x_data = [1.0, 2.0]
-    x = Variable(reshape(x_data, :, 1), "x")  # 2×1 input
+    x = Variable(reshape(x_data, :, 1), "x")
 
     model = Chain([
         Dense(2, 3, σ=ReLU),
@@ -12,11 +12,6 @@ using AutoDiffLib
     ])
 
     y = @toposort model(x)
-
-    # @show y
-
-    # @test y isa Variable
-    # @test size(y.value) == (1, 1)
 
     backward!(y)
 

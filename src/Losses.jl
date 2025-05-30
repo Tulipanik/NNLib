@@ -6,16 +6,11 @@ export binarycrossentropy, mse_loss
 
 const EPS = 1e-7
 
-# zeralizować na graph nodeach
 function binarycrossentropy(ŷ, y)
     y = y isa Variable ? y : Variable(y, "y")
     @assert size(ŷ.value) == size(y.value)
-    @show size((Constant(fill(1, size(y.value))) - y).value)
-    @show size((Constant(fill(1, size(ŷ.value))) - ŷ).value)
     eps = Constant(fill(EPS, size(y.value)))
-    @show (y .* log(ŷ + eps) + (Constant(fill(1, size(y.value))) - y) .* log(Constant(fill(1, size(ŷ.value))) - ŷ + eps)).value
     to_mean = y .* log(ŷ + eps) + (Constant(fill(1, size(y.value))) - y) .* log(Constant(fill(1, size(ŷ.value))) - ŷ + eps)
-    @show size(to_mean.value)
     loss = mean(to_mean)
     @show loss.value
     return loss
