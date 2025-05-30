@@ -4,7 +4,7 @@ using AutoDiffLib
 
 export Dense
 
-struct Dense
+mutable struct Dense
     W::Variable
     b::Variable
     σ::Function

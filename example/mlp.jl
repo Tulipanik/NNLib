@@ -9,14 +9,10 @@ y_train = load("data/imdb_dataset_prepared.jld2", "y_train")
 X_test = load("data/imdb_dataset_prepared.jld2", "X_test")
 y_test = load("data/imdb_dataset_prepared.jld2", "y_test")
 
-# println(typeof(y_train))
-
-using Revise
-using NNLib, Printf, Statistics
+using NNLib, Printf, Statistics, Debugger
 
 dataset = DataLoader((X_train, y_train), batchsize=64, shuffle=true)
-# println(typeof(dataset[1][2]))
-model = Chain([Dense(size(X_train, 1), 32, σ=ReLU), Dense(32, 1, σ=Sigmoid)])
+model = Chain([Dense(size(X_train, 1), 32), Dense(32, 1)])
 
 function loss(m, x, y)
     mse_loss(m(x), y)
@@ -33,17 +29,20 @@ for epoch in 1:epochs
 
     t = @elapsed begin
         for (x, y) in dataset
+            # @show x
             grads = gradient(model) do m
                 ŷ = Variable(x, "x")
                 l = loss(m, ŷ, y)
+                # @show ŷ.grad
+                # @show ŷ.value
+                # @show l.value
                 total_loss += l.value
                 total_acc += accuracy(m, x, y)
                 return l
             end
-            # grads - gradienty W w warstwach
+            # grads - gradienty W i b w warstwach
             for (layer, grad) in zip(model.layers, grads)
-                apply!(opt, layer.W.value, grad[1])
-                apply!(opt, layer.b.value, grad[2])
+                update!(opt, layer.W.value, grad[1], copy(layer.W.value))
             end
             num_samples += 1
         end

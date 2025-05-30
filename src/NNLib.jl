@@ -21,8 +21,8 @@ export Chain
 using .Losses: binarycrossentropy, mse_loss
 export binarycrossentropy, mse_loss
 
-using .Optimizer: Adam, apply!
-export Adam, apply!
+using .Optimizer: Adam, apply!, update!
+export Adam, apply!, update!
 
 using .Train: train!
 export train!

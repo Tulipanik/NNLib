@@ -10,11 +10,6 @@ struct DataLoader{T}
     shuffle::Bool
 end
 
-"""
-    DataLoader(data; batchsize=1, shuffle=false)
-
-Tworzy prosty DataLoader jak w Flux. Obsługuje macierze, krotki i namedtuple.
-"""
 function DataLoader(data; batchsize::Int=1, shuffle::Bool=false)
     DataLoader(data, batchsize, shuffle)
 end
